@@ -47,8 +47,10 @@ get '/:hsh' do |hsh|
 
   response = HTTParty.get(urls[hshs.index(hsh)])
    if response.code == 200
-      regexp = /(attendee|description|summary|location|organizer)([;:]).*\n([ ].*\n)*/i
-     return response.body.gsub(regexp, '\1\2X'+"\n")
+     regexp = /(attendee|description|summary|location|organizer):.*\n([ ].*\n)*/i
+     body = response.body.gsub(regexp, '\1:X'+"\n")
+     regexp2 = /attendee;.*\n([ ].*\n)*/i
+     body = body.gsub(regexp2, '')
    else
      return "Error: #{response.code}"
   end
