@@ -18,10 +18,16 @@
       <% urls.each_with_index do |url, i| %>
         <tr>
           <td style="font-size: 8pt; width: 200px;"><%= url %></td>
-          <td style="width: 500px;"><textarea style="width: 500px; height: 40px;"><%="#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"%>/<%= hshs[i] %></textarea></td>
+          <td style="width: 500px;"><textarea style="width: 500px; height: 40px;"><%="https://#{request.env['HTTP_HOST']}"%>/<%= hshs[i] %></textarea></td>
         </tr>
       <% end %>
     </table>
+
+    <p>
+      <strong>For use in Heorku config:</strong><br>
+      <textarea name="" id="" cols="30" rows="10"><%= hshs.map{|h| "https://#{request.env['HTTP_HOST']}/#{h}"}.join('|') %></textarea>
+    </p>
+
     <p>
       <strong>Licensed under the MIT license. There is no guarantee that your calendar files will be properly redacted. Use at your own risk.</strong>
       <pre>The MIT License (MIT)
